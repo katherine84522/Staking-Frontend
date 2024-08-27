@@ -13,14 +13,15 @@ const Home: NextPage = () => {
     e.preventDefault()
     const formData = new FormData(e.target as HTMLFormElement)
     const stakeAmount = formData.get('stakeAmount') as string
-    const decimals = 18; 
-    const convertedStakeAmount = ethers.parseUnits(stakeAmount, decimals); 
+    // const decimals = 18; 
+    // const convertedStakeAmount = ethers.parseUnits(stakeAmount, decimals); 
+    const convertedStakeAmount = BigInt(stakeAmount);
 
     writeContract({
-      address: '0xa910Ebb117d7Cb7757fD2b010eD0f7313712785f',
+      address: '0x5d0cDfF9316ef38C22a2Fd25FC2CB0e1Ad54D455',
       abi,
       functionName: 'depositnativeCurrency',
-      args: [0,BigInt(convertedStakeAmount)],
+      value: convertedStakeAmount
     })
   }
 
